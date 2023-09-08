@@ -1,5 +1,5 @@
 # products/models.py
-
+from api.category.models import Category
 from django.db import models
 
 class Product(models.Model):
@@ -7,7 +7,9 @@ class Product(models.Model):
     description = models.TextField()
     price = models.DecimalField(max_digits=10, decimal_places=2)
     stock = models.CharField(max_length=50)
-    image = models.ImageField(upload_to='products/')  # This field is for product images
+    is_active = models.BooleanField(default = True , blank = True)
+    category = models.ForeignKey(Category, on_delete=models.SET_NULL, blank=True , null = True)
+    image = models.ImageField(upload_to='products/', blank = True , null = True)  # This field is for product images
     created_at = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(auto_now=True)
 

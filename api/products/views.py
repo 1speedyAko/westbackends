@@ -1,4 +1,3 @@
-from django.shortcuts import render
 from rest_framework import viewsets
 from .serializers import ProductSerializers  # Adjust the import path
 from .models import Product  # Import the Product model

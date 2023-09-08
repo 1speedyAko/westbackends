@@ -1,11 +1,8 @@
-from rest_framework import routers
-from .import views
-from django.urls import path,include
-
-router = routers.DefaultRouter()
-router.register(r'', views.CategoryViewSet)
+# api/category/urls.py
+from django.urls import path
+from . import views
 
 urlpatterns = [
-    # Include the router's URLs
-    path('', include(router.urls)),
+    path('categories/', views.CategoryListCreateView.as_view(), name='category-list-create'),
+    path('categories/<int:pk>/', views.CategoryRetrieveUpdateDestroyView.as_view(), name='category-retrieve-update-destroy'),
 ]

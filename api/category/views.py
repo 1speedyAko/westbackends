@@ -1,9 +1,12 @@
-# from django.shortcuts import render
-from rest_framework import viewsets
-from .serializers import CategorySerializer
+# api/category/views.py
+from rest_framework import generics
 from .models import Category
+from .serializers import CategorySerializer
 
-class CategoryViewSet(viewsets.ModelViewSet):
-	queryset = Category.objects.all().order_by('name')
-	serializer_class = CategorySerializer
-# Create your views here.
+class CategoryListCreateView(generics.ListCreateAPIView):
+    queryset = Category.objects.all()
+    serializer_class = CategorySerializer
+
+class CategoryRetrieveUpdateDestroyView(generics.RetrieveUpdateDestroyAPIView):
+    queryset = Category.objects.all()
+    serializer_class = CategorySerializer
