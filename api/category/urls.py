@@ -1,8 +1,7 @@
-# api/category/urls.py
 from django.urls import path
-from . import views
+from .views import CategoryListCreateView, CategoryRetrieveUpdateDestroyView
 
 urlpatterns = [
-    path('categories/', views.CategoryListCreateView.as_view(), name='category-list-create'),
-    path('categories/<int:pk>/', views.CategoryRetrieveUpdateDestroyView.as_view(), name='category-retrieve-update-destroy'),
+    path('api/category/', CategoryListCreateView.as_view(), name='category-list-create'),
+    path('api/category/<int:pk>/', CategoryRetrieveUpdateDestroyView.as_view(), name='category-detail'),
 ]

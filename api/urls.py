@@ -4,12 +4,12 @@ from django.urls import path , include
 from . views import home
 
 
-urlpatterns = [
-   
+urlpatterns = [ 
     path('', home),
     path('users/', include('api.users.urls')),
     path('products/', include('api.products.urls')),
     path('orders/', include('api.orders.urls')),
-  
-
+    path('cart/', include('api.cart.urls')),
+    path('category/', include('api.category.urls')),
 ]
+
