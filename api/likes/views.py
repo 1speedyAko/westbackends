@@ -14,15 +14,15 @@ class UserRegister(APIView):
     def post(self,request):
         serializer = UserRegisterSerializer(data = request.data)
 
-        if serializer.is_valid():
+        if serializer :
             user=serializer.save()
             return Response({'message':'user registerd succesfully'})
         else:
             return Response(serializer.errors , status=status.HTTP_400_BAD_REQUEST)
     
 class UserLogout(APIView):
-    
-    permission_classes = (IsAuthenticated,)
+    authentication_classes = (SessionAuthentication, BasicAuthentication)
+    permissions_classes = (IsAuthenticated)
 
     def post(self,request):
         logout(request)
@@ -45,7 +45,7 @@ class UserView(APIView):
 
 
 class UserLogin(APIView):
-    permission_classes = [AllowAny,]
+    permission_classes = [AllowAny]
 
     def post(self, request):
        

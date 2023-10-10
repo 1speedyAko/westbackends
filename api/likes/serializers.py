@@ -9,18 +9,12 @@ class UserRegisterSerializer(serializers.ModelSerializer):
         model = UserModel
         fields = '__all__'
 
-    def create(self, validated_data):
-        user = UserModel.objects.create(
-            email=validated_data['email'],
-            first_name=validated_data.get('first_name', ''),
-            last_name=validated_data.get('last_name', '')
-        )
-        user.set_password(validated_data['password'])
-        user.save()
-        return user
-
-
-            
+    def create(self,validated_data):
+            user = UserModel(validated_data['email'])
+            user = UserModel(validated_data['username'], unique=True)
+            user.set_password(validated_data['password'])
+            user.save()
+            return user
 
 class UserLoginSerializer(serializers.Serializer):
     email = serializers.EmailField()
@@ -33,12 +27,12 @@ class UserLoginSerializer(serializers.Serializer):
         user = authenticate(username=email, password=password)
 
         if not user:
-            raise serializers.ValidationError({'detail': 'Invalid Email Or Password'})
-        return {'user': user}
+            raise serializers.ValidationError({'detail': 'Invalid credentials'})
+    return {'user': user}
 
 class UserSerializer(serializers.ModelSerializer):
     class Meta:
-        model = UserModel
-        fields = ('email', 'first_name' )
+        model = CustomUser
+        fields = ('email' )
 
        
